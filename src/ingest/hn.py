@@ -38,4 +38,4 @@ def fetch_hn_top(limit: int = 30) -> List[Dict[str, Any]]:
 
         return items
     except Exception as e:\n        print(f"HN fetch error: {e}")
-        return []
+        return []\nPYEOF

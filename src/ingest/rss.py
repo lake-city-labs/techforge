@@ -23,4 +23,4 @@ def fetch_rss(url: str, source_name: str) -> List[Dict[str, Any]]:
         }
         items.append(item)
 
-    return items
+    return items\nPYEOF

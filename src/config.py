@@ -12,4 +12,5 @@ def load_sources(config_path: str = "config/sources.yaml") -> Dict[str, Any]:
     if not path.exists():
         raise FileNotFoundError(f"Config not found: {config_path}")
 
-    with open(path, "r") as f:\n        return yaml.safe_load(f)
+    with open(path, "r") as f:
+        return yaml.safe_load(f)
