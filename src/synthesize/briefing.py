@@ -64,8 +64,6 @@ Write with the analyst voice defined in the system prompt.
     # Placeholder — in production this will call the Grok model
     return f"""[SYNTHESIS PLACEHOLDER]
 
-System Prompt: {ANALYST_SYSTEM_PROMPT[:100]}...
-
 User Prompt length: {len(user_prompt)} chars
 
 Ready to call model: {model}

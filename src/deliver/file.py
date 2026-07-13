@@ -3,6 +3,7 @@ File delivery for TechForge briefings
 """
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
 
 def save_briefing(briefing: str, date_str: Optional[str] = None) -> Path:
