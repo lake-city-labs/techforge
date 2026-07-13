@@ -57,6 +57,14 @@ def run_daily_briefing():
     html_content = generate_html(briefing, date_str)
     save_html(html_content, date_str)
 
+    # Ensure docs/index.html always points to the latest briefing
+    latest_html = Path("docs") / f"{date_str}.html"
+    index_html = Path("docs") / "index.html"
+    if latest_html.exists():
+        import shutil
+        shutil.copy(latest_html, index_html)
+        print(f"Updated docs/index.html -> {date_str}.html")
+
     # Discord
     discord_msg = format_discord_summary(briefing, date_str)
     post_to_discord(discord_msg)
