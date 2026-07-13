@@ -8,104 +8,141 @@
         :root {
             --bg: #0f0f0f;
             --text: #e5e5e5;
+            --muted: #9ca3af;
             --accent: #3b82f6;
-            --secondary: #1a1a1a;
+            --secondary: #161616;
+            --border: #2a2a2a;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
-            padding: 20px;
+            line-height: 1.65;
+            padding: 28px 20px 48px;
         }
-        
+
         .container {
             max-width: 780px;
             margin: 0 auto;
         }
-        
+
         header {
-            margin-bottom: 40px;
+            margin-bottom: 36px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--border);
         }
-        
+
         h1 {
-            font-size: 1.8rem;
-            font-weight: 600;
+            font-size: 1.9rem;
+            font-weight: 650;
+            letter-spacing: -0.02em;
             margin-bottom: 8px;
         }
-        
+
         .date {
-            color: #888;
+            color: var(--muted);
             font-size: 0.95rem;
         }
-        
+
         h2 {
-            font-size: 1.35rem;
-            margin: 40px 0 16px;
+            font-size: 1.25rem;
+            margin: 36px 0 14px;
             color: #fff;
+            letter-spacing: -0.01em;
         }
-        
-        .section {
-            margin-bottom: 32px;
+
+        section {
+            margin-bottom: 28px;
         }
-        
+
+        p {
+            margin: 0 0 14px;
+            color: var(--text);
+        }
+
         .signal {
             background: var(--secondary);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            padding: 18px 18px 16px;
+            border-radius: 10px;
+            margin-bottom: 14px;
         }
-        
+
         .signal h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             margin-bottom: 12px;
             color: #fff;
+            font-weight: 600;
+            line-height: 1.35;
         }
-        
-        .signal p {
-            margin-bottom: 10px;
+
+        .signal ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 10px;
         }
-        
+
+        .signal li {
+            color: #d4d4d4;
+        }
+
+        .signal li strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
         .implications {
             font-style: italic;
-            color: #aaa;
+            color: #b7b7b7;
             border-left: 3px solid var(--accent);
-            padding-left: 14px;
-            margin: 12px 0;
+            padding: 8px 0 8px 14px;
+            margin: 4px 0;
         }
-        
+
         .sources {
             font-size: 0.85rem;
             color: #777;
-            margin-top: 8px;
+            margin-top: 12px;
         }
-        
+
+        .plain-list {
+            list-style: disc;
+            padding-left: 1.25rem;
+            display: grid;
+            gap: 10px;
+            color: #d4d4d4;
+        }
+
+        .plain-list li {
+            padding-left: 0.15rem;
+        }
+
         footer {
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
+            margin-top: 56px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
             font-size: 0.85rem;
             color: #666;
         }
-        
+
         @media (max-width: 600px) {
             body {
-                padding: 16px;
+                padding: 18px 14px 36px;
             }
-            
+
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.55rem;
             }
-            
+
             .signal {
                 padding: 16px;
             }
@@ -118,42 +155,91 @@
             <h1>TechForge Briefing</h1>
             <div class="date">2026-07-12</div>
         </header>
-        
+
         <div class="content">
-            <p># TechForge Briefing — July 12, 2026</h2></p><p><h2>Macro Read
-Frontier models are rapidly shifting toward commodity infrastructure as token costs fall and performance gaps narrow between leaders. This is pushing differentiation upstream into agent products, orchestration layers, and domain-specific workflows rather than raw model scale. At the same time, open-weight efforts in China and aggressive cost-focused plays from OpenAI and Meta are creating real pressure on closed labs like Anthropic.</h2></p><p><h2>Top Signals
-- <strong>Cursor targets non-developers with general-purpose agent</strong>
-  - What happened: Cursor is developing "Sand," a general-purpose AI agent that manages email, messaging, and documents, positioned to compete directly with Claude Cowork.
-  - Why it matters now: The move expands AI coding platforms beyond developers into broader productivity use cases at a moment when agent reliability is improving.
-  - Implications for AI/agent builders: Expect increased competition in horizontal agent platforms; builders should focus on tight integration with existing workflows and measurable productivity gains rather than standalone model performance.
-  (Sources: The Information via Techmeme)</h2></p><p>- <strong>Chinese lab pushes aggressive openness on frontier models</strong>
-  - What happened: Z.ai founder Tang Jie argued that frontier AI capabilities should remain "as open and widely accessible as possible."
-  - Why it matters now: This stance comes as Western labs tighten access and as Chinese models like GLM demonstrate competitive performance.
-  - Implications for AI/agent builders: Open weights will likely accelerate experimentation and fine-tuning in specific verticals; teams should prepare for faster commoditization of base capabilities outside the absolute frontier.
-  (Sources: Bloomberg via Techmeme)</h2></p><p>- <strong>AI coding tools degrade open-source project quality</strong>
-  - What happened: Maintainers report being overwhelmed by low-quality, AI-generated contributions that require significant triage.
-  - Why it matters now: Adoption of coding agents has reached critical mass, turning a previously positive force into a maintenance burden.
-  - Implications for AI/agent builders: Agent output quality and review tooling will become key differentiators; raw generation speed alone is insufficient when it increases human overhead.
-  (Sources: Financial Times via Techmeme)</h2></p><p>- <strong>Production agent migration shows clear efficiency gains</strong>
-  - What happened: One team reported migrating a production AI agent to GPT-5.6, achieving 2.2x speed and 27% lower cost.
-  - Why it matters now: Concrete benchmarks from real workloads are emerging as newer models reach production.
-  - Implications for AI/agent builders: Cost and latency improvements are now material enough to justify regular model re-evaluation cycles; monitoring token economics per task is becoming a core operational practice.
-  (Sources: HN, ploy.ai)</h2></p><p>- <strong>Coding agents show large differences in prompt overhead</strong>
-  - What happened: Measurements revealed Claude Code sending 33k tokens before reading the user prompt, compared to 7k for OpenCode.
-  - Why it matters now: Token efficiency directly affects both cost and response quality in long-running agent sessions.
-  - Implications for AI/agent builders: Prompt engineering and agent scaffolding must account for hidden overhead; lighter frameworks may offer meaningful advantages in production.
-  (Sources: HN, systima.ai)</h2></p><p>- <strong>Hardware roadmap signals continued NPU scaling at Apple</strong>
-  - What happened: Apple is already taping out the M7 with major NPU upgrades and planning an M7 Ultra with 1.5TB RAM.
-  - Why it matters now: On-device inference capacity continues to grow faster than many expected.
-  - Implications for AI/agent builders: Local-first or hybrid agent architectures become more viable for privacy-sensitive or low-latency workloads.
-  (Sources: Mark Gurman/Bloomberg via Techmeme)</h2></p><p><h2>AI/Agents Spotlight
-The combination of Cursor's expansion into general agents, documented efficiency wins from GPT-5.6 migrations, and stark differences in agent token overhead points to a market where execution details matter more than model selection. Claude's decision to extend rate limits on paid plans appears defensive against cost-focused competitors. Meanwhile, the flood of low-quality AI contributions into open source suggests that agent builders ignoring verification and review loops will create downstream problems for the ecosystem they rely on.</h2></p><p><h2>Contech Corner
-Nothing material today.</h2></p><p><h2>What to Watch
-- Whether open-weight frontier models from Chinese labs gain meaningful adoption outside China.
-- How agent platforms handle the emerging maintenance burden on open-source projects.
-- The rate at which production teams re-platform agents as incremental model releases deliver measurable cost/latency gains.</p>
+        <section>
+        <h2>Macro Read</h2>
+        <p>Frontier models are rapidly shifting toward commodity infrastructure as token costs fall and performance gaps narrow between leaders. This is pushing differentiation upstream into agent products, orchestration layers, and domain-specific workflows rather than raw model scale. At the same time, open-weight efforts in China and aggressive cost-focused plays from OpenAI and Meta are creating real pressure on closed labs like Anthropic.</p>
+        </section>
+
+        <section>
+        <h2>Top Signals</h2>
+        <article class="signal">
+            <h3>Cursor targets non-developers with general-purpose agent</h3>
+            <ul>
+                <li><strong>What happened:</strong> Cursor is developing "Sand," a general-purpose AI agent that manages email, messaging, and documents, positioned to compete directly with Claude Cowork.</li>
+                <li><strong>Why it matters now:</strong> The move expands AI coding platforms beyond developers into broader productivity use cases at a moment when agent reliability is improving.</li>
+                <li class="implications"><strong>Implications for AI/agent builders:</strong> Expect increased competition in horizontal agent platforms; builders should focus on tight integration with existing workflows and measurable productivity gains rather than standalone model performance.</li>
+            </ul>
+            <div class="sources">Sources: The Information via Techmeme</div>
+        </article>
+        <article class="signal">
+            <h3>Chinese lab pushes aggressive openness on frontier models</h3>
+            <ul>
+                <li><strong>What happened:</strong> Z.ai founder Tang Jie argued that frontier AI capabilities should remain "as open and widely accessible as possible."</li>
+                <li><strong>Why it matters now:</strong> This stance comes as Western labs tighten access and as Chinese models like GLM demonstrate competitive performance.</li>
+                <li class="implications"><strong>Implications for AI/agent builders:</strong> Open weights will likely accelerate experimentation and fine-tuning in specific verticals; teams should prepare for faster commoditization of base capabilities outside the absolute frontier.</li>
+            </ul>
+            <div class="sources">Sources: Bloomberg via Techmeme</div>
+        </article>
+        <article class="signal">
+            <h3>AI coding tools degrade open-source project quality</h3>
+            <ul>
+                <li><strong>What happened:</strong> Maintainers report being overwhelmed by low-quality, AI-generated contributions that require significant triage.</li>
+                <li><strong>Why it matters now:</strong> Adoption of coding agents has reached critical mass, turning a previously positive force into a maintenance burden.</li>
+                <li class="implications"><strong>Implications for AI/agent builders:</strong> Agent output quality and review tooling will become key differentiators; raw generation speed alone is insufficient when it increases human overhead.</li>
+            </ul>
+            <div class="sources">Sources: Financial Times via Techmeme</div>
+        </article>
+        <article class="signal">
+            <h3>Production agent migration shows clear efficiency gains</h3>
+            <ul>
+                <li><strong>What happened:</strong> One team reported migrating a production AI agent to GPT-5.6, achieving 2.2x speed and 27% lower cost.</li>
+                <li><strong>Why it matters now:</strong> Concrete benchmarks from real workloads are emerging as newer models reach production.</li>
+                <li class="implications"><strong>Implications for AI/agent builders:</strong> Cost and latency improvements are now material enough to justify regular model re-evaluation cycles; monitoring token economics per task is becoming a core operational practice.</li>
+            </ul>
+            <div class="sources">Sources: HN, ploy.ai</div>
+        </article>
+        <article class="signal">
+            <h3>Coding agents show large differences in prompt overhead</h3>
+            <ul>
+                <li><strong>What happened:</strong> Measurements revealed Claude Code sending 33k tokens before reading the user prompt, compared to 7k for OpenCode.</li>
+                <li><strong>Why it matters now:</strong> Token efficiency directly affects both cost and response quality in long-running agent sessions.</li>
+                <li class="implications"><strong>Implications for AI/agent builders:</strong> Prompt engineering and agent scaffolding must account for hidden overhead; lighter frameworks may offer meaningful advantages in production.</li>
+            </ul>
+            <div class="sources">Sources: HN, systima.ai</div>
+        </article>
+        <article class="signal">
+            <h3>Hardware roadmap signals continued NPU scaling at Apple</h3>
+            <ul>
+                <li><strong>What happened:</strong> Apple is already taping out the M7 with major NPU upgrades and planning an M7 Ultra with 1.5TB RAM.</li>
+                <li><strong>Why it matters now:</strong> On-device inference capacity continues to grow faster than many expected.</li>
+                <li class="implications"><strong>Implications for AI/agent builders:</strong> Local-first or hybrid agent architectures become more viable for privacy-sensitive or low-latency workloads.</li>
+            </ul>
+            <div class="sources">Sources: Mark Gurman/Bloomberg via Techmeme</div>
+        </article>
+        </section>
+
+        <section>
+        <h2>AI/Agents Spotlight</h2>
+        <p>The combination of Cursor's expansion into general agents, documented efficiency wins from GPT-5.6 migrations, and stark differences in agent token overhead points to a market where execution details matter more than model selection. Claude's decision to extend rate limits on paid plans appears defensive against cost-focused competitors. Meanwhile, the flood of low-quality AI contributions into open source suggests that agent builders ignoring verification and review loops will create downstream problems for the ecosystem they rely on.</p>
+        </section>
+
+        <section>
+        <h2>Contech Corner</h2>
+        <p>Nothing material today.</p>
+        </section>
+
+        <section>
+        <h2>What to Watch</h2>
+        <ul class="plain-list">
+            <li>Whether open-weight frontier models from Chinese labs gain meaningful adoption outside China.</li>
+            <li>How agent platforms handle the emerging maintenance burden on open-source projects.</li>
+            <li>The rate at which production teams re-platform agents as incremental model releases deliver measurable cost/latency gains.</li>
+        </ul>
+        </section>
         </div>
-        
+
         <footer>
             Generated by TechForge • 2026-07-12
         </footer>
