@@ -2,8 +2,31 @@
 Real Discord delivery for TechForge briefings
 """
 import os
+import subprocess
 import requests
 from typing import Optional
+
+
+def get_discord_bot_token() -> Optional[str]:
+    """
+    Try to get the Discord bot token from OpenClaw config first,
+    then fall back to environment variable.
+    """
+    # Try OpenClaw config
+    try:
+        result = subprocess.run(
+            ["openclaw", "config", "get", "discord.bot_token"],
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return result.stdout.strip()
+    except Exception:
+        pass
+
+    # Fall back to environment variable
+    return ***"DISCORD_BOT_TOKEN")
 
 
 def post_to_discord(
@@ -13,13 +36,13 @@ def post_to_discord(
 ) -> bool:
     """
     Post a message to Discord using the bot token.
-    Falls back to printing if no token is provided.
     """
     if not bot_token:
-        bot_token = ***"DISCORD_BOT_TOKEN")
+        bot_token = get_discord_bot_token()
 
     if not bot_token:
-        print("[Discord] No bot token found. Message would be:")
+        print("[Discord] No bot token found (checked OpenClaw config + DISCORD_BOT_TOKEN env var)")
+        print("[Discord] Message would be:")
         print(message[:500] + "..." if len(message) > 500 else message)
         return False
 
@@ -43,7 +66,6 @@ def post_to_discord(
 
 def format_discord_summary(briefing: str, date_str: str) -> str:
     """Create a skimmable Discord version of the briefing."""
-    # Take first ~1500 chars and add link to full report
     summary = briefing[:1500]
     if len(briefing) > 1500:
         summary += "..."
