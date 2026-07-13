@@ -5,28 +5,31 @@ Daily AI/technology intelligence briefing generator.
 """
 import sys
 from pathlib import Path
+from datetime import datetime
 
-# Add src to path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from config import load_sources
 from ingest import fetch_rss, fetch_hn_top
 from normalize import deduplicate
+from synthesize import generate_briefing
+from deliver import save_briefing, post_to_discord, format_discord_summary
 
 
-def run_ingestion():
-    """Run the full ingestion pipeline."""
+def run_daily_briefing():
+    """Full daily briefing pipeline."""
+    print("=== TechForge.Briefing.v1 ===\n")
+
+    # 1. Ingestion
     print("Loading sources...")
     config = load_sources()
     sources = config.get("sources", [])
 
     all_items = []
-
     for source in sources:
         name = source["name"]
         stype = source["type"]
         url = source.get("url")
-
         print(f"  Fetching: {name}...")
 
         if stype == "rss":
@@ -37,19 +40,23 @@ def run_ingestion():
             all_items.extend(items)
 
     print(f"\nTotal items before dedup: {len(all_items)}")
-
-    # Deduplicate
     unique_items = deduplicate(all_items)
     print(f"Total items after dedup:  {len(unique_items)}")
 
-    return unique_items
+    # 2. Synthesis
+    print("\nGenerating briefing with Grok...")
+    briefing = generate_briefing(unique_items)
 
+    # 3. Delivery
+    date_str = datetime.now().strftime("%Y-%m-%d")
+    save_briefing(briefing, date_str)
 
-def main():
-    print("=== TechForge.Briefing.v1 ===\n")
-    items = run_ingestion()
-    print(f"\nIngestion complete. {len(items)} unique items ready for synthesis.")
+    discord_msg = format_discord_summary(briefing)
+    post_to_discord(discord_msg)
+
+    print("\n=== Briefing complete ===")
+    return briefing
 
 
 if __name__ == "__main__":
-    main()\nPYEOF
+    run_daily_briefing()
