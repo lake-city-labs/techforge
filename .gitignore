@@ -36,16 +36,29 @@ env/
 .DS_Store
 Thumbs.db
 
-# Secrets / local config
+# Secrets
 .env
-config/local.yaml
 secrets/
+*.key
+*.pem
 
-# Keep daily digests (we want these in git)
-!artifacts/tech-digests/
-!artifacts/tech-digests/*.md
+# Logs
+logs/
+*.log
 
-# Large model files / caches (if we add any later)
+# Node / dependencies
+node_modules/
+package-lock.json
+
+# Large generated files
 *.bin
 *.safetensors
-cache/
+
+# Keep daily digests
+!artifacts/tech-digests/
+!artifacts/tech-digests/*.md
+!artifacts/tech-digests/*.html
+
+# Keep docs/ for GitHub Pages
+!docs/
+!docs/*.html
