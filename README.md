@@ -4,17 +4,9 @@ Daily AI and technology intelligence briefings powered by Grok.
 
 ## GitHub Pages (Live Website)
 
-HTML versions are generated in `docs/`.
+HTML versions are generated in `docs/` and the root `index.html` is automatically updated to the latest briefing via GitHub Actions.
 
-### Enable GitHub Pages
-
-1. Repo → **Settings** → **Pages**
-2. Source: **Deploy from a branch**
-3. Branch: `main`
-4. Folder: `/docs`
-5. Save
-
-Live URL example: `https://YOUR-USERNAME.github.io/techforge/2026-07-12.html`
+The workflow (` .github/workflows/pages.yml `) dynamically copies the most recent digest to `index.html` on every push to `main`.
 
 ## Quick Start
 
