@@ -140,40 +140,31 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 
 def generate_html(briefing_markdown: str, date_str: str) -> str:
-    """Convert the briefing markdown into a clean responsive HTML page."""
-    
-    # Very basic markdown-to-HTML conversion for the briefing structure
+    """Convert briefing into responsive HTML."""
     html_content = briefing_markdown
     
-    # Convert headers
+    # Basic markdown conversion
     html_content = html_content.replace("## ", "<h2>").replace("\n\n", "</h2>\n\n")
     
-    # Convert bold
     import re
     html_content = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html_content)
-    
-    # Convert bullet points (simple)
-    html_content = html_content.replace("- **", "<p><strong>").replace("**", "</strong></p>")
-    
-    # Wrap paragraphs
     html_content = html_content.replace("\n\n", "</p><p>")
     html_content = "<p>" + html_content + "</p>"
     
-    html = HTML_TEMPLATE.format(
-        date=date_str,
-        content=html_content
-    )
-    
-    return html
+    return HTML_TEMPLATE.format(date=date_str, content=html_content)
 
 
 def save_html(html_content: str, date_str: str) -> Path:
-    """Save the HTML briefing."""
-    output_dir = Path("artifacts/tech-digests")
-    output_dir.mkdir(parents=True, exist_ok=True)
+    """Save HTML to both artifacts/ and docs/ (for GitHub Pages)."""
+    # Main artifacts folder
+    artifacts_dir = Path("artifacts/tech-digests")
+    artifacts_dir.mkdir(parents=True, exist_ok=True)
+    (artifacts_dir / f"{date_str}.html").write_text(html_content)
     
-    filepath = output_dir / f"{date_str}.html"
-    filepath.write_text(html_content)
+    # docs/ folder for GitHub Pages
+    docs_dir = Path("docs")
+    docs_dir.mkdir(exist_ok=True)
+    (docs_dir / f"{date_str}.html").write_text(html_content)
     
-    print(f"[HTML] Saved to {filepath}")
-    return filepath
+    print(f"[HTML] Saved to artifacts/ and docs/")
+    return docs_dir / f"{date_str}.html"

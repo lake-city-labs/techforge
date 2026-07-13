@@ -2,47 +2,55 @@
 
 Daily AI and technology intelligence briefings powered by Grok.
 
+## GitHub Pages (Live Website)
+
+HTML versions are automatically generated in the `docs/` folder.
+
+### Enable GitHub Pages
+
+1. Go to your repo → **Settings** → **Pages**
+2. Under "Build and deployment":
+   - Source: **Deploy from a branch**
+   - Branch: `main`
+   - Folder: `/docs`
+3. Save
+
+Your briefings will be live at:
+`https://YOUR-USERNAME.github.io/techforge/YYYY-MM-DD.html`
+
 ## Quick Start
 
-### 1. Environment Variables
-Create a `.env` file in the project root with:
+### Environment Variables
+Create a `.env` file:
 
 ```env
 XAI_API_KEY=***
 DISCORD_BOT_TOKEN=***
 ```
 
-### 2. Install Dependencies
+### Install Dependencies
 
 ```bash
 python3 -m pip install -r requirements.txt
 ```
 
-### 3. Test Run
+### Test Run
 
 ```bash
 python3 techforge.py
 ```
 
-### 4. Daily Automation (7 AM)
+### Daily Automation
 
-The `launchd` job is already installed and loaded.
+Already set up via `launchd` (runs at 7:00 AM daily).
 
-To reload after changes:
+Logs: `logs/techforge.log`
 
-```bash
-launchctl unload ~/Library/LaunchAgents/com.lakecitylabs.techforge.plist
-launchctl load ~/Library/LaunchAgents/com.lakecitylabs.techforge.plist
-```
+## Output Locations
 
-Logs are written to:
-- `logs/techforge.log`
-- `logs/techforge-error.log`
-
-## Output
-
-- Full briefing: `artifacts/tech-digests/YYYY-MM-DD.md`
-- Discord summary posted to `cassius-updates`
+- Markdown: `artifacts/tech-digests/YYYY-MM-DD.md`
+- HTML: `artifacts/tech-digests/YYYY-MM-DD.html` + `docs/YYYY-MM-DD.html`
+- Discord: Posted to `cassius-updates`
 
 ## Repo
 
