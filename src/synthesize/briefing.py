@@ -1,15 +1,27 @@
 """
-Briefing synthesis using Grok (xAI)
+Briefing synthesis using Grok (xAI) via direct HTTP
 """
 import os
+from dotenv import load_dotenv
+import requests
 from typing import List, Dict, Any
-from openai import OpenAI
 
 from .prompts import ANALYST_SYSTEM_PROMPT
 
+# Load environment variables from .env file
+load_dotenv()
 
-def build_briefing_context(items: List[Dict[str, Any]], max_items: int = 25) -> str:
-    """Build a compact context string from items for the LLM."""
+
+def build_briefing_context(items: List[Dict[str, Any]], max_items: int = 60) -> str:
+    """
+    Build a compact context string from items for the LLM.
+    
+    TODO: Make this smarter over time:
+    - Prioritize by source weight (from config)
+    - Boost items with scores (HN)
+    - Recency weighting
+    - Deduplicate more aggressively at context level
+    """
     context_lines = []
     for i, item in enumerate(items[:max_items], 1):
         title = item.get("title", "")
@@ -29,7 +41,7 @@ def build_briefing_context(items: List[Dict[str, Any]], max_items: int = 25) -> 
 
 def generate_briefing(items: List[Dict[str, Any]], model: str = "grok-4.3") -> str:
     """
-    Generate the daily briefing using Grok via xAI API.
+    Generate the daily briefing using Grok via direct xAI API call.
     """
     context = build_briefing_context(items)
 
@@ -64,25 +76,30 @@ Please produce a high-quality daily briefing in this exact structure:
 Write with the analyst voice defined in the system prompt.
 """
 
-    # Initialize xAI client (OpenAI compatible)
-    client = OpenAI(
-        api_key=os.getenv("XAI_API_KEY", "your-api-key-here"),
-        base_url="https://api.x.ai/v1"
-    )
+    api_key = ***"XAI_API_KEY")
+    if not api_key:
+        return "[ERROR] XAI_API_KEY environment variable not set."
+
+    url = "https://api.x.ai/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": ANALYST_SYSTEM_PROMPT},
+            {"role": "user", "content": user_prompt},
+        ],
+        "temperature": 0.7,
+        "max_tokens": 4000,
+    }
 
     try:
-        response = client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role": "system", "content": ANALYST_SYSTEM_PROMPT},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.7,
-            max_tokens=4000,
-        )
-
-        return response.choices[0].message.content
-
+        resp = requests.post(url, json=payload, headers=headers, timeout=120)
+        resp.raise_for_status()
+        data = resp.json()
+        return data["choices"][0]["message"]["content"]
     except Exception as e:\n        return f"""[ERROR] Failed to generate briefing with Grok: {e}
 
 Fallback placeholder briefing would go here.
