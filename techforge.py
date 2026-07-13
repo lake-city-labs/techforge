@@ -13,7 +13,7 @@ from config import load_sources
 from ingest import fetch_rss, fetch_hn_top
 from normalize import deduplicate
 from synthesize import generate_briefing
-from deliver import save_briefing, post_to_discord, format_discord_summary
+from deliver import save_briefing, save_html, generate_html, post_to_discord, format_discord_summary
 
 
 def run_daily_briefing():
@@ -49,8 +49,15 @@ def run_daily_briefing():
 
     # 3. Delivery
     date_str = datetime.now().strftime("%Y-%m-%d")
+    
+    # Save Markdown
     save_briefing(briefing, date_str)
+    
+    # Generate and save HTML
+    html_content = generate_html(briefing, date_str)
+    save_html(html_content, date_str)
 
+    # Discord
     discord_msg = format_discord_summary(briefing, date_str)
     post_to_discord(discord_msg)
 
