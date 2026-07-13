@@ -76,7 +76,7 @@ Please produce a high-quality daily briefing in this exact structure:
 Write with the analyst voice defined in the system prompt.
 """
 
-    api_key = ***"XAI_API_KEY")
+    api_key = os.getenv("XAI_API_KEY")
     if not api_key:
         return "[ERROR] XAI_API_KEY environment variable not set."
 
@@ -100,7 +100,8 @@ Write with the analyst voice defined in the system prompt.
         resp.raise_for_status()
         data = resp.json()
         return data["choices"][0]["message"]["content"]
-    except Exception as e:\n        return f"""[ERROR] Failed to generate briefing with Grok: {e}
+    except Exception as e:
+        return f"""[ERROR] Failed to generate briefing with Grok: {e}
 
 Fallback placeholder briefing would go here.
 """

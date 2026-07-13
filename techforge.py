@@ -51,7 +51,7 @@ def run_daily_briefing():
     date_str = datetime.now().strftime("%Y-%m-%d")
     save_briefing(briefing, date_str)
 
-    discord_msg = format_discord_summary(briefing)
+    discord_msg = format_discord_summary(briefing, date_str)
     post_to_discord(discord_msg)
 
     print("\n=== Briefing complete ===")
