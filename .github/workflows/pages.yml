@@ -16,6 +16,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Copy latest briefing to index
+        run:
+|
+          ls artifacts/tech-digests/*.html 2>/dev/null && \
+          cp artifacts/tech-digests/2026-07-12.html index.html || echo "no digest yet"
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Build with Jekyll
