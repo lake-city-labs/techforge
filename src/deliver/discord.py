@@ -5,6 +5,9 @@ import os
 import subprocess
 import requests
 from typing import Optional
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def get_discord_bot_token() -> Optional[str]:
@@ -21,7 +24,7 @@ def get_discord_bot_token() -> Optional[str]:
     except Exception:
         pass
 
-    return ***"DISCORD_BOT_TOKEN")
+    return os.getenv("DISCORD_BOT_TOKEN")
 
 
 def post_to_discord(
@@ -50,7 +53,8 @@ def post_to_discord(
         resp.raise_for_status()
         print(f"[Discord] Posted to channel {channel_id}")
         return True
-    except Exception as e:\n        print(f"[Discord] Failed to post: {e}")
+    except Exception as e:
+        print(f"[Discord] Failed to post: {e}")
         return False
 
 
