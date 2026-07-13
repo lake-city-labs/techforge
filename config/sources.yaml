@@ -1,0 +1,69 @@
+# TechForge.Briefing.v1 - Source Configuration
+# Version: 1.0
+
+version: "1.0"
+description: "Initial high-signal sources for TechForge daily briefings"
+
+sources:
+  - name: "Techmeme"
+    type: "rss"
+    url: "https://www.techmeme.com/feed.xml"
+    weight: 1.0
+    category: "aggregator"
+
+  - name: "Hacker News Top"
+    type: "hn_firebase"
+    url: "https://hacker-news.firebaseio.com/v0/topstories.json"
+    weight: 0.9
+    category: "engineering"
+
+  - name: "Simon Willison"
+    type: "rss"
+    url: "https://simonwillison.net/atom/entries/"
+    weight: 1.2
+    category: "ai"
+
+  - name: "Hugging Face Blog"
+    type: "rss"
+    url: "https://huggingface.co/blog/feed.xml"
+    weight: 1.1
+    category: "ai"
+
+  - name: "The Batch (DeepLearning.AI)"
+    type: "rss"
+    url: "https://www.deeplearning.ai/the-batch/feed/"
+    weight: 1.0
+    category: "ai"
+
+  - name: "TechCrunch"
+    type: "rss"
+    url: "https://techcrunch.com/feed/"
+    weight: 0.8
+    category: "news"
+
+  - name: "Ars Technica"
+    type: "rss"
+    url: "https://feeds.arstechnica.com/arstechnica/index/"
+    weight: 0.85
+    category: "tech"
+
+  - name: "Reuters Technology"
+    type: "rss"
+    url: "https://www.reuters.com/rssFeed/technologyNews"
+    weight: 0.75
+    category: "news"
+
+  - name: "VentureBeat"
+    type: "rss"
+    url: "https://venturebeat.com/feed/"
+    weight: 0.8
+    category: "ai_enterprise"
+
+# Future sources (commented out for v1)
+# - name: "X Accounts"
+#   type: "x_api"
+#   enabled: false
+
+# - name: "TBPN"
+#   type: "youtube_whisper"
+#   enabled: false
