@@ -17,10 +17,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Copy latest briefing to index
-        run:
-|
-          ls artifacts/tech-digests/*.html 2>/dev/null && \
-          cp artifacts/tech-digests/2026-07-12.html index.html || echo "no digest yet"
+        run: |
+          if [ -f artifacts/tech-digests/2026-07-12.html ]; then
+            cp artifacts/tech-digests/2026-07-12.html index.html
+            echo "Copied latest briefing"
+          else
+            echo "No digest found"
+          fi
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Build with Jekyll
